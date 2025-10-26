@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="jakarta.faces.passthrough"
+      >
+    <h:head>
+        <title>JSF 01 - ziarno, parametry formularza, nawigacja, messages + primefaces</title>
+    </h:head>
+    <h:body>
+        <p:panel header="JSF 01 - ziarno, formularz, parametry, nawigacja, messages + primefaces" style="margin: 1em auto;">
+            
+        <h:form id="bla">
+            <p:panelGrid columns="3" styleClass="showcase-text-align-center"> 
+
+                <p:outputLabel for="kwota" value="Wpisz kwote"/>
+                <p:inputText id="kwota" value="#{calcBB.kwota}" required="true" requiredMessage="Brak okresu" />
+                <p:message for="kwota" />
+
+                <p:outputLabel for="okres" value="Wpisz okres"/>
+                <p:inputText id="okres"  value="#{calcBB.okres}" required="true" requiredMessage="Brak okresu" />
+                <p:message for="okres" />
+
+                <p:outputLabel for="op" value="Wpisz oprocentowanie (bez %) "/>
+                <p:inputText id="op" value="#{calcBB.op}" required="true" requiredMessage="Brak oprocentowania"/>
+                <p:message for="op" />
+            </p:panelGrid>    
+
+            <p:messages id="msg" />
+
+            <p:commandButton value="Oblicz" styleClass="ui-button-secondary" action="#{calcBB.calc()}" update="@form"/>
+            <br />
+            <p:commandButton value="Oblicz (AJAX)" styleClass="ui-button-secondary" action="#{calcBB.calc_AJAX()}" update="@form"/>
+
+            <br />
+            <h:commandLink value="Informacje" action="#{calcBB.info()}" />
+        </h:form>
+        </p:panel> 
+    </h:body>
+</html>
