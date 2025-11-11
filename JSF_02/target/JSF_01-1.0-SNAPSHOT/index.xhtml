@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="jakarta.faces.passthrough"
+      >
+    
+    <ui:composition template="/templates/page-template.xhtml">
+        <ui:define name="pageContent">
+        <p:panel header="Kalkulator kredytowy" style="margin: 1em auto;">
+            
+        <h:form id="bla">
+            <p:panelGrid columns="3" styleClass="showcase-text-align-center"> 
+
+                <p:outputLabel for="kwota" value="Wpisz kwote"/>
+                <p:inputNumber id="kwota" value="#{calcBB.kwota}" required="true" requiredMessage="Brak kwoty" symbol="PLN" symbolPosition="s" decimalPlaces="2" decimalSeparator="." minValue="0" maxValue="100000" />
+                <p:message for="kwota" />
+
+                <p:outputLabel for="okres" value="Wpisz okres w latach"/>
+                <p:inputNumber id="okres"  value="#{calcBB.okres}" required="true" requiredMessage="Brak okresu" decimalSeparator="." decimalPlaces="2" minValue="0.5" maxValue="10" />
+                <p:message for="okres" />
+
+                <p:outputLabel for="op" value="Wpisz oprocentowanie (bez %) "/>
+                <p:inputNumber id="op" value="#{calcBB.op}" symbol="%" required="true" requiredMessage="Brak oprocentowania" symbolPosition="s" decimalPlaces="2" decimalSeparator="." minValue="0" maxValue="100" />
+                <p:message for="op" />
+            </p:panelGrid>    
+
+            <p:messages id="msg" />
+
+            <p:commandButton value="Oblicz" styleClass="ui-button-secondary" action="#{calcBB.calc()}" update="@form"/>
+            <br />
+            <p:commandButton value="Oblicz (AJAX)" styleClass="ui-button-secondary" action="#{calcBB.calc_AJAX()}" update="@form"/>
+
+            <br />
+            <h:commandLink value="Informacje" action="#{calcBB.info()}" />
+        </h:form>
+            
+        </p:panel> 
+    </ui:define>
+    </ui:composition>
+</html>
