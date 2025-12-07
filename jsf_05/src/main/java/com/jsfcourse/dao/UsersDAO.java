@@ -1,0 +1,115 @@
+package com.jsfcourse.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+
+import com.jsfcourse.entities.Users;
+
+@Stateless
+public class UsersDAO {
+
+    private final static String UNIT_NAME = "jsf_course_sushiPU";
+
+
+    @PersistenceContext(unitName = UNIT_NAME)
+    protected EntityManager em;
+
+    public void create(Users user) {
+        em.persist(user);
+    }
+
+    public Users merge(Users user) {
+        return em.merge(user);
+    }
+
+    public void remove(Users user) {
+        em.remove(em.merge(user));
+    }
+
+    public Users find(Long idUser) {
+        return em.find(Users.class, idUser);
+    }
+
+    public List<Users> getFullList() {
+        List<Users> list = null;
+
+        Query query = em.createQuery("select u from Users u");
+
+        try {
+            list = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public List<Users> getList(Map<String, Object> searchParams) {
+        List<Users> list = null;
+
+
+        String select = "select u ";
+        String from = "from Users u ";
+        String where = "";
+        String orderby = "order by u.lastName asc, u.firstName asc  ";
+
+        String lastName = (String) searchParams.get("lastName");
+        if (lastName != null) {
+            if (where.isEmpty()) {
+                where = "where ";
+            } else {
+                where += "and ";
+            }
+            where += "u.lastName like :lastName ";
+        }
+
+        String firstName = (String) searchParams.get("firstName");
+        if (firstName != null) {
+            if (where.isEmpty()) {
+                where = "where ";
+            } else {
+                where += "and ";
+            }
+            where += "u.firstName like :firstName ";
+        }
+
+
+        Query query = em.createQuery(select + from + where + orderby);
+
+
+        if (lastName != null) {
+            query.setParameter("lastName", lastName + "%");
+        }
+        if (firstName != null) {
+            query.setParameter("firstName", firstName + "%");
+        }
+
+        try {
+            list = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public Users getUserFromDatabase(String login, String password) {
+        try {
+            return em.createQuery("SELECT u FROM Users u WHERE u.login = :login AND u.password = :password", Users.class)
+                    .setParameter("login", login)
+                    .setParameter("password", password)
+                    .getSingleResult();
+        } catch (jakarta.persistence.NoResultException e) {
+            System.out.println("Пользователь не найден: " + login);
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+}
