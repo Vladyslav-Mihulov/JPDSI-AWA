@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<div id="sidebar">
+    <div class="inner">
+
+        <!-- Menu -->
+        <nav class="sidebar-menu">
+            <h3>Menu</h3>
+            <ul>
+                <li>
+                    <h:link outcome="/pages/usersList" styleClass="menu-item">Homepage</h:link>
+                </li>
+                <li>
+                    <h:link outcome="/pages/login" styleClass="menu-item">Login</h:link>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Contact -->
+        <section style="margin-top:30px;">
+            <h3>Skontaktuj się z nami</h3>
+            <ul class="contact">
+                <li class="icon solid fa-envelope">
+                    <a href="mailto:test@test.pl">test@test.pl</a>
+                </li>
+                <li class="icon solid fa-phone">+00-000-000-000</li>
+                <li class="icon solid fa-home">
+                    Address<br/>City
+                </li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="copyright">
+                &#169; Author: Vladyslav Mihulov
+            </p>
+        </footer>
+
+    </div>
+</div>
+
+    </ui:composition>

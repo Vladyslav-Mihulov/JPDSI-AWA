@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <header id="header">
+
+        <!-- Logo -->
+        <h:link outcome="/pages/usersList" styleClass="logo">
+            <strong>Project VM</strong>
+        </h:link>
+
+        <!-- Social icons -->
+        <div class="header-toolbar" style="float:right;">
+            <h:outputLink value="#" styleClass="icon brands fa-facebook-f" target="_blank">
+                <span class="label">Facebook</span>
+            </h:outputLink>
+
+            <h:outputLink value="#" styleClass="icon brands fa-instagram" target="_blank">
+                <span class="label">Instagram</span>
+            </h:outputLink>
+        </div>
+
+    </header>
+
+</ui:composition>
