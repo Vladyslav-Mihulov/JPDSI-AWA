@@ -1,0 +1,17 @@
+com\jsfcourse\entities\Orders.class
+jakarta\faces\simplesecurity\RemoteClient.class
+jakarta\faces\simplesecurity\SecurityFilter.class
+com\jsfcourse\users\RegistrationBB.class
+com\jsfcourse\entities\Roles.class
+com\jsfcourse\entities\Users.class
+com\jsfcourse\entities\UserRole.class
+com\jsfcourse\dao\UserRoleDAO.class
+com\jsfcourse\entities\UserRolePK.class
+com\jsfcourse\entities\ProductOrderPK.class
+com\jsfcourse\entities\Products.class
+com\jsfcourse\entities\Sessions.class
+com\jsfcourse\users\LoginBB.class
+com\jsfcourse\dao\UsersDAO.class
+com\jsfcourse\users\UsersListBB.class
+com\jsfcourse\entities\ProductOrder.class
+com\jsfcourse\users\UsersEditBB.class

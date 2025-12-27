@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/main-template.xhtml">
+
+
+    <ui:define name="title">Strona główna</ui:define>
+
+
+    <ui:define name="content">
+        <p:panel header="Menu" style="max-width: 400px; margin: auto;">
+            <h:form>
+                
+                <p:messages id="globalMessages"  closable="true" />
+            </h:form>
+        </p:panel>
+    </ui:define>
+
+</ui:composition>
