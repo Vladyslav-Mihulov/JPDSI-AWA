@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+        <h:outputStylesheet library="css" name="fontawesome-all.min.css" />
+        <h:outputStylesheet library="css" name="main.css" />
+        <title><ui:insert name="title">lalalal </ui:insert></title>
+    </h:head>
+
+    <h:body>
+
+        <!-- Header -->
+        <ui:include src="/templates/inc/header-template.xhtml" />
+
+        <!-- Wrapper -->
+        <div id="wrapper">
+            <!-- Main -->
+            <div id="main">
+                <div class="inner">
+                    <!-- Banner -->
+                    <section id="banner">
+                        <div class="content">
+                            <header>
+                                <h1><ui:insert name="title">Tytuł</ui:insert></h1>
+                            </header>
+                            <p>
+                                <ui:insert name="content">Treść domyślna</ui:insert>
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <ui:include src="/templates/inc/sidebar-template.xhtml" />
+
+        </div>
+
+        <!-- Scripts -->
+        <h:outputScript library="js" name="jquery.min.js" />
+        <h:outputScript library="js" name="browser.min.js" />
+        <h:outputScript library="js" name="breakpoints.min.js" />
+        <h:outputScript library="js" name="util.js" />
+        <h:outputScript library="js" name="main.js" />
+    </h:body>
+
+</ui:composition>
