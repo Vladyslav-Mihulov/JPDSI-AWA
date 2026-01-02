@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<f:metadata>
+    <f:viewAction action="#{usersEditBB.onLoad()}" />
+</f:metadata>
+
+<h:head>
+    <meta charset="utf-8"/>
+    <title>Edycja użytkownika</title>
+</h:head>
+
+<h:body style="background-color: #eee; margin: 0.5em;">
+
+    <p:panel toggleable="true" header="Edycja użytkownika">
+
+        <h:form rendered="#{usersEditBB.user != null}">
+            <h:panelGrid columns="3" cellpadding="5">
+
+                <h:outputLabel for="login" value="Login:" />
+                <p:inputText id="login" value="#{usersEditBB.user.login}"
+                             required="true" requiredMessage="Podaj login"
+                             validatorMessage="maksymalnie 40 znaków">
+                    <f:validateLength maximum="40"/>
+                </p:inputText>
+                <p:message for="login" display="icon"/>
+                
+                <h:outputLabel for="firstName" value="Imię:" />
+                <p:inputText id="firstName" value="#{usersEditBB.user.firstName}"
+                             required="true" requiredMessage="Podaj imię"
+                             validatorMessage="maksymalnie 40 znaków">
+                    <f:validateLength maximum="40"/>
+                </p:inputText>
+                <p:message for="firstName" display="icon"/>
+
+                <h:outputLabel for="lastName" value="Nazwisko:" />
+                <p:inputText id="lastName" value="#{usersEditBB.user.lastName}"
+                             required="true" requiredMessage="Podaj nazwisko"
+                             validatorMessage="maksymalnie 40 znaków">
+                    <f:validateLength maximum="40"/>
+                </p:inputText>
+                <p:message for="lastName" display="icon"/>
+
+                <h:outputLabel for="email" value="Email:" />
+                <p:inputText id="email" value="#{usersEditBB.user.email}"
+                             required="true" requiredMessage="Podaj email">
+                </p:inputText>
+                <p:message for="email" display="icon"/>
+
+            </h:panelGrid>
+
+            <p:messages id="msgs" />
+
+            <p:commandButton value="Zapisz" action="#{usersEditBB.saveData()}"
+                             style="margin-right: 1em;" update="@form" />
+
+            <p:button value="Anuluj" outcome="usersList" />
+        </h:form>
+
+    </p:panel>
+
+</h:body>
+
+</html>

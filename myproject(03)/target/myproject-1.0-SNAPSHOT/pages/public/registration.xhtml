@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:ui="jakarta.faces.facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/main-template.xhtml">
+
+
+    <ui:define name="title">#{txtMain['titleRegistration']}</ui:define>
+
+
+    <ui:define name="content">
+        <p:panel header="#{txtMain['titleRegistration']}" style="max-width: 400px; margin: auto;">
+              <h:form id="registerForm">
+                <p:panelGrid columns="2" columnClasses="label,value" style="width:100%;">
+
+                    <h:outputLabel for="login" value="#{txtMain['enterLogin']}" />
+                    <p:inputText id="login" value="#{registrationBB.login}" required="true" requiredMessage="#{txtMain['requiredLogin']}" />
+
+                    <h:outputLabel for="email" value="#{txtMain['enterEmail']}" />
+                    <p:inputText id="email" value="#{registrationBB.email}" required="true" requiredMessage="#{txtMain['requiredEmail']}" />
+
+                    <h:outputLabel for="firstName" value="#{txtMain['enterFirstName']}" />
+                    <p:inputText id="firstName" value="#{registrationBB.firstName}" required="true" requiredMessage="#{txtMain['requiredFirstName']}"/>
+
+                    <h:outputLabel for="lastName" value="#{txtMain['enterLastName']}" />
+                    <p:inputText id="lastName" value="#{registrationBB.lastName}" required="true" requiredMessage="#{txtMain['requiredLastName']}" />
+
+                    <h:outputLabel for="password" value="#{txtMain['enterPassword']}" />
+                    <p:password id="password" value="#{registrationBB.password}" required="true" requiredMessage="#{txtMain['requiredPassword']}" />
+
+                    <h:outputLabel for="passwordConfirm" value="#{txtMain['enterPassword2']}" />
+                    <p:password id="passwordConfirm" value="#{registrationBB.passwordConfirm}" required="true" requiredMessage="#{txtMain['requiredPassword2']}" />
+
+                </p:panelGrid>
+
+                <p:commandButton value="#{txtMain['doRegistration']}" action="#{registrationBB.doRegistration()}" update="@form" style="margin-top:10px; width:100%;" />
+                <p:messages id="messages" closable="true" />
+
+            </h:form>
+        </p:panel>
+    </ui:define>
+
+</ui:composition>
