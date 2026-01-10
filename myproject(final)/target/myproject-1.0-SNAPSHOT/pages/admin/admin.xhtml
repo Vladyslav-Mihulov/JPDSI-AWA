@@ -1,0 +1,110 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="jakarta.faces.html"
+    xmlns:ui="jakarta.faces.facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/templates/main-template.xhtml"
+    xmlns:f="jakarta.faces.core">
+
+    <ui:define name="title">
+        Administrator – użytkownicy
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h2>Lista użytkowników</h2>
+
+        <h:form id="usersForm">
+
+            <p:messages id="globalMessages" style="width:100%;" closable="true" />
+
+            <p:panel header="Opcje wyszukiwania" toggleable="true" collapsed="true"
+                     style="margin-bottom: 1em;">
+                <h:panelGrid columns="4" cellpadding="5">
+
+                    <h:outputLabel value="ID: " />
+                    <p:inputText value="#{adminBB.idUser}">
+                        <p:ajax event="keyup" update="usersTable" />
+                    </p:inputText>
+
+                    <h:outputLabel value="Login: " />
+                    <p:inputText value="#{adminBB.login}">
+                        <p:ajax event="keyup" update="usersTable" />
+                    </p:inputText>
+
+                    <h:outputLabel value="Email: " />
+                    <p:inputText value="#{adminBB.email}">
+                        <p:ajax event="keyup" update="usersTable" />
+                    </p:inputText>
+
+                    <h:outputLabel value="Nazwisko: " />
+                    <p:inputText value="#{adminBB.lastName}">
+                        <p:ajax event="keyup" update="usersTable" />
+                    </p:inputText>
+
+                    <h:outputLabel value="Imię: " />
+                    <p:inputText value="#{adminBB.firstName}">
+                        <p:ajax event="keyup" update="usersTable" />
+                    </p:inputText>
+
+                </h:panelGrid>
+            </p:panel>
+
+            <p:dataTable id="usersTable" value="#{adminBB.list}" var="u" paginator="true" rows="10" style="width:100%;">
+
+                <p:column headerText="ID">
+                    #{u.idUser}
+                </p:column>
+
+                <p:column headerText="Login">
+                    #{u.login}
+                </p:column>
+
+                <p:column headerText="Email">
+                    #{u.email}
+                </p:column>
+
+                <p:column headerText="Imię">
+                    #{u.firstName}
+                </p:column>
+
+                <p:column headerText="Nazwisko">
+                    #{u.lastName}
+                </p:column>
+
+                <p:column headerText="Role">
+                    <ui:repeat value="#{u.userRoleCollection}" var="ur">
+                        <p:tag value="#{ur.roles.roleName}" severity="info" styleClass="mr-1"/>
+                    </ui:repeat>
+                </p:column>
+
+
+                <p:column headerText="Utworzono">
+                    <h:outputText value="#{u.createdAt}">
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Zmodyfikowano">
+                    <h:outputText value="#{u.updatedAt}">
+                    </h:outputText>
+                    <h:outputText value="—" rendered="#{empty u.updatedAt}"/>
+                </p:column>
+
+                <p:column headerText="Utworzył">
+                    <h:outputText value="#{u.whoCreated}">
+                    </h:outputText>
+                    <h:outputText value="—" rendered="#{empty u.whoCreated}"/>
+                </p:column>
+
+                <p:column headerText="Zmodyfikował">
+                    <h:outputText value="#{u.whoModify}">
+                    </h:outputText>
+                    <h:outputText value="—" rendered="#{empty u.whoCreated}"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>

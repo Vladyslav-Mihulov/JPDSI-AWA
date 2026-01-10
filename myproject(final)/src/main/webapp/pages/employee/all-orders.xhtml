@@ -1,0 +1,63 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="jakarta.faces.html"
+    xmlns:ui="jakarta.faces.facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/templates/main-template.xhtml">
+
+    <ui:define name="title">
+        Wszystkie zamówienia
+    </ui:define>
+
+    <ui:define name="content">
+        
+        <h2>Lista wszystkich zamówień</h2>
+        
+        <p:messages id="globalMessages" style="width:100%;" closable="true" />
+        <h:form id="ordersForm">
+            
+        <p:dataTable value="#{employeeBB.allOrders}" var="order" paginator="true" rows="5" style="width:100%" >
+
+            <p:column headerText="ID zamówienia">
+                #{order.idOrder}
+            </p:column>
+
+            <p:column headerText="Status">
+                <h:outputText value="#{order.status == 0 ? 'Koszyk' : (order.status == 1 ? 'Złożone' : (order.status == 2 ? 'Potwierdzone' : (order.status == 3 ? 'Wykonane' : 'Nieznany')))}"/>
+            </p:column>
+
+            <p:column headerText="Data złożenia">
+                <h:outputText value="#{order.dateOrder}">
+                    
+                </h:outputText>
+            </p:column>
+
+            <p:column headerText="Data zakończenia">
+                <h:outputText value="#{order.dateEndOrder}">
+                    
+                </h:outputText>
+                <h:outputText value="nie zakończone" rendered="#{empty order.dateEndOrder}" />
+            </p:column>
+
+            <p:column headerText="Łączna cena">
+                #{order.totalPrice} zł
+            </p:column>
+
+            <p:column headerText="Produkty">
+                <ui:repeat value="#{order.productOrderCollection}" var="po">
+                    <strong>#{po.products.nameProduct}</strong><br/>
+                    Ilość: #{po.quantity}<br/>
+                    Cena: #{po.price} zł<br/><br/>
+                </ui:repeat>
+            </p:column>
+
+            <p:column headerText="Akcje">
+                <p:commandButton value="Zmień status" action="#{employeeBB.changeStatus(order.idOrder)}" update=":ordersForm :globalMessages" rendered="#{order.status lt 3}"/>
+            </p:column>
+
+        </p:dataTable>
+            
+        </h:form>
+        
+    </ui:define>
+</ui:composition>

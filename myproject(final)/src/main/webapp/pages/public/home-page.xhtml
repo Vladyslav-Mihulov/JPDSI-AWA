@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="jakarta.faces.html"
+    xmlns:ui="jakarta.faces.facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/templates/main-template.xhtml">
+
+    <ui:define name="title">
+        Strona główna
+
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h:panelGroup layout="block" style="width:100%;" styleClass="content">
+
+            <h2>Menu</h2>
+
+            <p:messages id="globalMessages" style="width:100%;" closable="true" />
+
+            <p:dataGrid value="#{homePageBB.products}" var="product" columns="3" paginator="true" rows="9" style="width:100%;">
+
+                <p:panel styleClass="product-card">
+
+                    <h:graphicImage value="/resources/images/#{product.image}" style="width:100%; height:auto;" />
+
+                    <h3>#{product.nameProduct}</h3>
+
+                    <p>#{product.description}</p>
+
+                    <p>
+                        <b>Cena:</b> #{product.price} zł
+                    </p>
+
+                    <h:form rendered="#{not empty remoteClient.details}">
+                        <p:commandButton value="Kup" icon="pi pi-shopping-cart" action="#{cartBB.addToCart(product.idProduct, 1)}" update="@form :globalMessages" />
+                    </h:form>
+
+                </p:panel>
+
+            </p:dataGrid>
+
+            <h:link outcome="/pages/user/cart?faces-redirect=true"
+                    styleClass="cart">
+                🛒 Koszyk
+            </h:link>
+
+        </h:panelGroup>
+
+    </ui:define>
+
+</ui:composition>

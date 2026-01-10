@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="jakarta.faces.html"
+    xmlns:ui="jakarta.faces.facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/templates/main-template.xhtml">
+
+    <ui:define name="title">
+        Twój koszyk
+    </ui:define>
+
+    <ui:define name="content">
+        <p:messages id="globalMessages" style="width:100%;" closable="true" />
+        <h:panelGroup layout="block" style="width:100%;" styleClass="content">
+            <h2>Zawartość koszyka</h2>
+
+            <h:form id="cartForm">
+
+                <p:dataTable value="#{cartBB.cartItems}" var="item" style="width:100%;" styleClass="cart-table" 
+                             emptyMessage="Koszyk jest pusty. Dodaj produkty, aby je zobaczyć tutaj." 
+                             paginator="false">
+
+                    <p:column headerText="Produkt">
+                        <h:outputText value="#{item.products.nameProduct}" />
+                    </p:column>
+
+                    <p:column headerText="Ilość">
+                        <h:outputText value="#{item.quantity}" />
+                        <p:commandButton value="-" styleClass="button small" 
+                                         action="#{cartBB.removeFromCart(item)}" 
+                                         update="@form" />
+                    </p:column>
+
+                    <p:column headerText="Cena za szt.">
+                        <h:outputText value="#{item.products.price} zł" />
+                    </p:column>
+
+                    <p:column headerText="Razem">
+                        <h:outputText value="#{item.price} zł" />
+                    </p:column>
+
+                </p:dataTable>
+
+                <h:panelGroup rendered="#{not empty cartBB.cartItems}" layout="block" style="margin-top:20px;">
+                    <h:outputText value="Suma całkowita: #{cartBB.totalPrice} zł" 
+                                  style="font-weight:bold; font-size:1.2em;" />
+                    
+                    <p:commandButton value="Złóż zamówienie" styleClass="button primary" 
+                                     action="#{cartBB.checkout}" update="@form"/>
+                </h:panelGroup>
+
+            </h:form>
+
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>
